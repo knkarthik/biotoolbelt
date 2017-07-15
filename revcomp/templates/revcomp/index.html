@@ -1,0 +1,39 @@
+{% load crispy_forms_tags %}
+<head xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
+    <meta name="Author" content="Karthik K.N">
+    <title> Reverse Complement</title>
+</head>
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<link href="https://fonts.googleapis.com/css?family=Merriweather" rel="stylesheet">
+
+<div class="jumbotron text-center" style="background-color: #add8d8">
+<h2 style="font-family: Merriweather" align="center"> Reverse Complement</h2>
+        <p>Convert a DNA sequence into its reverse-complement </p>
+    </div>
+
+{#<body text="black", BGCOLOR="teal">#}
+{#<table CELLPADDING=5 COLS=1 WIDTH="283" BGCOLOR="#ffe4c4" style="margin-left: 45%">#}
+{#<tr>#}
+{#<td>#}
+{#<font color="#8b4513" size=+5>Reverse Complement</font>#}
+{#</td>#}
+{#</tr>#}
+{#</table>#}
+{#<p>Paste DNA sequence in FASTA format below and hit Submit</p>#}
+<p style="font-size: large"> Paste DNA sequence in FASTA format below or upload a fasta file</p>
+<br></<br>
+{#<form method="post" enctype="multipart/form-data"  action=''>#}
+{#    {% csrf_token %}#}
+{#    <textarea  style="font-size:15px;border: hidden" name="seq" rows="10" cols="100" autofocus="autofocus"#}
+{#    placeholder=">Sample sequence#}
+{#GGGGaaaaaaaatttatatat"></textarea><br>#}
+{#    <p><font color="#f0ffff" size=+2 </font>or upload your sequence in FASTA file</p>#}
+{#    <input type="file" name="upload_flle" accept="text/plain">#}
+{#    <input type="submit" value="Submit" style="width: 5em;height: 2em;" />#}
+{#</form>#}
+{##}
+{#</body>#}
+{% csrf_token %}
+{% crispy form %}

@@ -1,0 +1,4 @@
+{% if 'valid' not in seq and 'empty' not in seq %}
+    <p style="font-size: large"> Reverse complement of your sequence is:</p>
+{% endif %}
+<textarea cols="100" rows="30" style="border: hidden" readonly>{{ seq }}</textarea>

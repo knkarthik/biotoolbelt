@@ -1,0 +1,32 @@
+h2 {
+    border-bottom: 1px;
+    border-bottom:dotted;
+    color:darkslateblue;
+    text-align: left;
+    font-family: 'Calibri', serif
+}
+
+table {
+    display: table;
+    border-collapse: separate;
+    border-spacing: 1px
+}
+
+th {
+    border-style: solid;
+    border-color: #add8d8;
+    background-color: lightblue;
+    font-family: "Droid Serif", "DejaVu Serif", "STIX", serif;
+    text-align: center;
+
+}
+
+td{
+    border-style:solid;
+    border-color: #d8d8d8;
+    background-color:lightgray;
+
+
+
+
+}
