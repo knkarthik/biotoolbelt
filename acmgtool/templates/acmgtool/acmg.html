@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
+<head>
+    <title>ACMG NGS Variant Interpretation Tool</title>
+    <meta charset="utf-8"/>
+    <meta name="description" content="Automatically assign the pathogenicity of
+    Next-generation sequencing variants based on the standards and guidelines for the interpretation of sequence
+variants by ACMG-AMP consortium"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="../../static/acmg.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="container">
+    <h1>ACMG Sequence Variant Interpretation Tool</h1>
+    <p class="desc-text">
+        With the evolution of Next-generation sequencing technolgoies (NGS) clinical laboratories
+        are increasingly performing genotyping studies that span from single gene to the whole
+        genome in order to understand genetic disorders. In 2015 the American College of Medical Genetics and Genomics
+        (ACMG) and the Association for Molecular Pathology (AMP) published a joint consensus recommendation
+        on <a href="https://www.ncbi.nlm.nih.gov/pubmed/25741868"> standards and guidelines for the interpretation of sequence variants</a>,
+        which since has been an invaluable tool for interpreting the clinical significance of next-generation sequencing variants.
+        <br><br>
+        This tool incorporates the ACMG-AMP algorithm to automatically assign pathogenecity to the variants
+        identified using NGS technologies. To use this tool, select the evidences you have gathered for
+        a variant and hit the "Submit" button.
+
+    <br><br>
+    <form role="form", action="" method="post"> {% csrf_token %}
+        <input type="submit" data-spy="affix" data-offset-top="25" class="btn btn-primary btn-lg float-right" value="Submit" style="position:fixed">
+        {% if checks|last|length != 0 %}
+            <p class="result
+                {% if checks|first == "Pathogenic" %}red{% endif %}
+                {% if checks|first == "Likely Pathogenic" %}orange{% endif %}
+                {% if checks|first == "Likely benign" %}yellowgreen{% endif %}
+                {% if checks|first == "Benign" %}green{% endif %}">
+                ACMG Classification: {{ checks|first }}
+
+                </p>
+            <p class="result"> Evidence: {{ checks|last|upper }}</p>
+
+        {% endif %}
+        <br><br>
+    <table class="table">
+        <tbody>
+        <tr class="danger">
+            <td>
+                <fieldset class="form-group">
+                    <input type="checkbox" name = "checks" id = "pvs1" value="pvs1">
+                    <label for="checkbox1"></label>
+                </fieldset>
+            </td>
+            <td class="txt">Predicted null variant in a gene where LOF is a known mechanism of disease PVS1
+            </td>
+        </tr>
+        <tr class="danger">
+            <td>
+                <fieldset class="form-group">
+                    <input type="checkbox" name="checks" id="ps4" value="ps4">
+                    <label for="checkbox1"></label>
+                </fieldset>
+            </td>
+            <td class="txt">Prevalence in affected statistically increased over controls PS4
+            </td>
+        </tr>
+        <tr class="danger">
+            <td>
+                <fieldset class="form-group">
+                    <input type="checkbox" name="checks" id="ps1" value="ps1">
+                    <label for="checkbox1"></label>
+                </fieldset>
+            </td>
+            <td class="txt">Same amino acid change as an established pathogenic variant PS1
+            </td>
+        </tr>
+        <tr class="danger">
+            <td>
+                <fieldset class="form-group">
+                    <input type="checkbox" name="checks" id="ps3" value="ps3">
+                    <label for="checkbox1"></label>
+                </fieldset>
+            </td>
+            <td class="txt">Well-established functional studies show a deleterious effect PS3
+            </td>
+        </tr>
+        <tr class="danger">
+            <td>
+                <fieldset class="form-group">
+                    <input type="checkbox" name="checks" id="ps2" value="ps2">
+                    <label for="checkbox1"></label>
+                </fieldset>
+            </td>
+            <td class="txt">De novo (paternity and maternity confirmed) PS2
+            </
+            >
+        </tr>
+        <tr class="warning">
+            <td>
+                <fieldset class="form-group">
+                    <input type="checkbox" name="checks" id="pm2" value="pm2">
+                    <label for="checkbox1"></label>
+                </fieldset>
+            </td>
+            <td class="txt">Absent in population databases PM2
+            </td>
+        </tr>
+        <tr class="warning">
+            <td>
+                <fieldset class="form-group">
+                    <input type="checkbox" name="checks" id="pm5" value="pm5">
+                    <label for="checkbox1"></label>
+                </fieldset>
+            </td>
+            <td class="txt">Novel missense change at an amino acid residue where a different pathogenic missense change
+                has been
+                seen before PM5
+            </td>
+        </tr>
+        <tr class="warning">
+            <td>
+                <fieldset class="form-group">
+                    <input type="checkbox" name="checks" id="pm4" value="pm4">
+                    <label for="checkbox1"></label>
+                </fieldset>
+            </td>
+            <td class="txt"> Protein length changing variant PM4
+            </td>
+        </tr>
+        <tr class="warning">
+            <td>
+                <fieldset class="form-group">
+                    <input type="checkbox" name="checks" id="pm1" value="pm1">
+                    <label for="checkbox1"></label>
+                </fieldset>
+            </td>
+            <td class="txt">Mutational hot spot
+                or well-studied
+                functional domain
+                without benign
+                variation PM
+            </td>
+        </tr>
+        <tr class="warning">
+            <td>
+                <fieldset class="form-group">
+                    <input type="checkbox" name="checks" id="pm6" value="pm6">
+                    <label for="checkbox1"></label>
+                </fieldset>
+            </td>
+            <td class="txt">De novo (without
+                paternity & maternity
+                confirmed) PM6
+            </td>
+        </tr>
+        <tr class="warning">
+            <td>
+                <fieldset class="form-group">
+                    <input type="checkbox" name="checks" id="pm3" value="pm3">
+                    <label for="checkbox1"></label>
+                </fieldset>
+            </td>
+            <td class="txt">For recessive
+                disorders, detected
+                in trans with a
+                pathogenic variant
+                PM3
+            </td>
+        </tr>
+        <tr class="success">
+            <td>
+                <fieldset class="form-group">
+                    <input type="checkbox" name="checks" id="pp3" value="pp3">
+                    <label for="checkbox1"></label>
+                </fieldset>
+            </td>
+            <td class="txt">Multiple lines of
+                computational
+                evidence support a
+                deleterious effect
+                on the gene /gene
+                product PP3
+            </td>
+        </tr>
+        <tr class="success">
+            <td>
+                <fieldset class="form-group">
+                    <input type="checkbox" name="checks" id="pp2" value="pp2">
+                    <label for="checkbox1"></label>
+                </fieldset>
+            </td>
+            <td class="txt">Missense in gene with
+                low rate of benign
+                missense variants and
+                path. missenses
+                common PP2
+            </td>
+        </tr>
+        <tr class="success">
+            <td>
+                <fieldset class="form-group">
+                    <input type="checkbox" name="checks" id="pp1" value="pp1">
+                    <label for="checkbox1"></label>
+                </fieldset>
+            </td>
+            <td class="txt">Cosegregation with
+                disease in multiple
+                affected family
+                members PP1
+            </td>
+        </tr>
+        <tr class="success">
+            <td>
+                <fieldset class="form-group">
+                    <input type="checkbox" name="checks" id="pp5" value="pp5">
+                    <label for="checkbox1"></label>
+                </fieldset>
+            </td>
+            <td class="txt">Reputable source
+                = pathogenic PP5
+            </td>
+        </tr>
+        <tr class="success">
+            <td>
+                <fieldset class="form-group">
+                    <input type="checkbox" name="checks" id="pp4" value="pp4">
+                    <label for="checkbox1"></label>
+                </fieldset>
+            </td>
+            <td class="txt">Patient’s phenotype or
+                FH highly specific for
+                gene PP4
+            </td>
+        </tr>
+        <tr class="info">
+            <td>
+                <fieldset class="form-group">
+                    <input type="checkbox" name="checks" id="bp4" value="bp4">
+                    <label for="checkbox1"></label>
+                </fieldset>
+            </td>
+            <td class="txt">Multiple lines of
+                computational evidence
+                suggest no impact on gene
+                /gene product BP4
+            </td>
+        </tr>
+        <tr class="info">
+            <td>
+                <fieldset class="form-group">
+                    <input type="checkbox" name="checks" id="bp1" value="bp1">
+                    <label for="checkbox1"></label>
+                </fieldset>
+            </td>
+            <td class="txt">Missense in gene where
+                only truncating cause
+                disease BP1
+            </td>
+        </tr>
+        <tr class="info">
+            <td>
+                <fieldset class="form-group">
+                    <input type="checkbox" name="checks" id="bp7" value="bp7">
+                    <label for="checkbox1"></label>
+                </fieldset>
+            </td>
+            <td class="txt">Silent variant with non
+                predicted splice impact BP7
+            </td>
+        </tr>
+        <tr class="info">
+            <td>
+                <fieldset class="form-group">
+                    <input type="checkbox" name="checks" id="bp3" value="bp3">
+                    <label for="checkbox1"></label>
+                </fieldset>
+            </td>
+            <td class="txt">In-frame indels in repeat
+                w/out known function BP3
+            </td>
+        </tr>
+        <tr class="info">
+            <td>
+                <fieldset class="form-group">
+                    <input type="checkbox" name="checks" id="bp2" value="bp2">
+                    <label for="checkbox1"></label>
+                </fieldset>
+            </td>
+            <td class="txt">Observed in trans with
+                a dominant variant BP2
+            </td>
+        </tr>
+        <tr class="info">
+            <td>
+                <fieldset class="form-group">
+                    <input type="checkbox" name="checks" id="bp2" value="bp2">
+                    <label for="checkbox1"></label>
+                </fieldset>
+            </td>
+            <td class="txt">Observed in cis with a
+                pathogenic variant BP2
+            </td>
+        </tr>
+        <tr class="info">
+            <td>
+                <fieldset class="form-group">
+                    <input type="checkbox" name="checks" id="bp6" value="bp6">
+                    <label for="checkbox1"></label>
+                </fieldset>
+            </td>
+            <td class="txt">Reputable source w/out
+                shared data = benign BP6
+            </td>
+        </tr>
+        <tr class="info">
+            <td>
+                <fieldset class="form-group">
+                    <input type="checkbox" name="checks" id="bp5" value="bp5">
+                    <label for="checkbox1"></label>
+                </fieldset>
+            </td>
+            <td class="txt">Found in case with
+                an alternate cause
+                BP5
+            </td>
+        </tr>
+        <tr class="active">
+            <td>
+                <fieldset class="form-group">
+                    <input type="checkbox" name="checks" id="ba1" value="ba1">
+                    <label for="checkbox1"></label>
+                </fieldset>
+            </td>
+            <td class="txt">MAF is too high for
+                disorder BA1
+            </td>
+        </tr>
+        <tr class="active">
+            <td>
+                <fieldset class="form-group">
+                    <input type="checkbox" name="checks" id="bs1" value="bs1">
+                    <label for="checkbox1"></label>
+                </fieldset>
+            </td>
+            <td class="txt">Allele frequency is greater than expected for disorder BS1
+            </td>
+        </tr>
+        <tr class="active">
+            <td>
+                <fieldset class="form-group">
+                    <input type="checkbox" name="checks" id="bs2" value="bs2">
+                    <label for="checkbox1"></label>
+                </fieldset>
+            </td>
+            <td class="txt">Observation in controls
+                inconsistent with
+                disease penetrance BS2
+            </td>
+        </tr>
+        <tr class="active">
+            <td>
+                <fieldset class="form-group">
+                    <input type="checkbox" name="checks" id="bs3" value="bs3">
+                    <label for="checkbox1"></label>
+                </fieldset>
+            </td>
+            <td class="txt">Well-established
+                functional studies show
+                no deleterious effect
+                BS3
+            </td>
+        </tr>
+        <tr class="active">
+            <td>
+                <fieldset class="form-group">
+                    <input type="checkbox" name="checks" id="bs4" value="bs4">
+                    <label for="checkbox1"></label>
+                </fieldset>
+            </td>
+            <td class="txt">Nonsegregation
+                with disease BS4
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    </form>
+</div>
+</body>
+</html>
+

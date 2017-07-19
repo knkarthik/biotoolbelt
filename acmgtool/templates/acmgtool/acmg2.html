@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+{% if checks %}
+
+    <table>
+        <tr>
+            <th>Variant Name</th>
+            <th>Evidence</th>
+            <th>Classification</th>
+        </tr>
+        <tr>
+            <td>varname</td>
+            <td>{{ checks }}</td>
+            <td> pathogenic</td>
+        </tr>
+{#        {% for item in checks %}#}
+{#            {% cycle 'row' '' as row silent %}#}
+{#            {% if row %}#}
+{#                <tr>{% endif %}#}
+{#        <td>#}
+{#            {{ checks }}#}
+{#        </td>#}
+{#        {% if not row %}</tr>{% endif %}#}
+{#        {% endfor %}#}
+    </table>
+{% endif %}
+</body>
+</html>
