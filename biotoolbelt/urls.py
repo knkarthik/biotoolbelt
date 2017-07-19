@@ -22,7 +22,7 @@ urlpatterns = [
     # url(r'^ftree/', include('ftree.urls')),
     url(r'^revcomp/', include('revcomp.urls')),
     url(r'^getsequence/', include('getsequence.urls')),
-    url(r'^acmgtool/', include('acmgtool.urls')),
+    url(r'^acmgtool/', include('acmgtool.urls', namespace='acmgtool')),
 
 
 
