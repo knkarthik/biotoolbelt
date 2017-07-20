@@ -26,4 +26,3 @@ class ACMGTests(TestCase):
         self.assertTemplateUsed(request, 'acmgtool/acmg.html')
         self.assertContains(request, self.test_template_data)
 
-
